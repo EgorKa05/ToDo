@@ -16,7 +16,6 @@ const priorityInput = document.getElementById('priority-input');
 const message = document.getElementById('message');
 const list = document.getElementById('todo-list');
 const counter = document.getElementById('counter');
-const clearCompletedBtn = document.getElementById('clear-completed');
 const filterButtons = Array.from(document.querySelectorAll('.filter-btn'));
 const searchInput = document.getElementById('search-input');
 const priorityFilterInput = document.getElementById('priority-filter');
@@ -28,20 +27,6 @@ render();
 form.addEventListener('submit', (event) => {
   event.preventDefault();
   addTask(taskInput.value, priorityInput.value);
-});
-
-clearCompletedBtn.addEventListener('click', () => {
-  const beforeCount = state.tasks.length;
-  state.tasks = state.tasks.filter((task) => !task.completed);
-
-  if (beforeCount === state.tasks.length) {
-    setMessage('Нет выполненных задач для очистки.');
-    return;
-  }
-
-  saveTasks();
-  render();
-  setMessage('Выполненные задачи удалены.');
 });
 
 filterButtons.forEach((button) => {
