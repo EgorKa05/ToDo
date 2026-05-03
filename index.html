@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Список дел</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <main class="todo-app">
+    <h1>Список дел</h1>
+
+    <form id="todo-form" class="todo-form" autocomplete="off">
+      <input
+        id="task-input"
+        type="text"
+        placeholder="Введите задачу"
+        maxlength="100"
+        aria-label="Текст задачи"
+      />
+
+      <select id="priority-input" aria-label="Приоритет задачи">
+        <option value="high">Высокий приоритет</option>
+        <option value="medium" selected>Средний приоритет</option>
+        <option value="low">Низкий приоритет</option>
+      </select>
+
+      <button type="submit">Добавить</button>
+    </form>
+
+    <p id="message" class="message" role="alert" aria-live="polite"></p>
+
+    <section class="toolbar" aria-label="Управление списком">
+      <div class="filters" role="group" aria-label="Фильтрация задач">
+        <button type="button" class="filter-btn active" data-filter="all">Все</button>
+        <button type="button" class="filter-btn" data-filter="active">Активные</button>
+        <button type="button" class="filter-btn" data-filter="completed">Выполненные</button>
+      </div>
+      <p id="counter" class="counter">Осталось: 0</p>
+      <button id="clear-completed" type="button" class="clear-btn">Очистить выполненные</button>
+    </section>
+
+    <ul id="todo-list" class="todo-list" aria-label="Список задач"></ul>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
