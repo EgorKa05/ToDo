@@ -1,5 +1,5 @@
 # ToDo
-Приложение **To-Do List** на HTML/CSS/JavaScript.
+Приложение **To-Do List** на чистом HTML/CSS/JavaScript.
 
 ## Что реализовано в To-Do
 - Добавление задачи кнопкой и клавишей `Enter`.
