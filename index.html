@@ -36,6 +36,23 @@
         <button type="button" class="filter-btn" data-filter="active">Активные</button>
         <button type="button" class="filter-btn" data-filter="completed">Выполненные</button>
       </div>
+
+      <div class="extra-filters" aria-label="Дополнительные фильтры">
+        <input id="search-input" type="search" placeholder="Поиск по тексту..." aria-label="Поиск задач" />
+        <select id="priority-filter" aria-label="Фильтр по приоритету">
+          <option value="all" selected>Все приоритеты</option>
+          <option value="high">Только высокий</option>
+          <option value="medium">Только средний</option>
+          <option value="low">Только низкий</option>
+        </select>
+        <select id="sort-mode" aria-label="Сортировка">
+          <option value="created_desc" selected>Сначала новые</option>
+          <option value="created_asc">Сначала старые</option>
+          <option value="alpha_asc">А-Я</option>
+          <option value="alpha_desc">Я-А</option>
+        </select>
+      </div>
+
       <p id="counter" class="counter">Осталось: 0</p>
       <button id="clear-completed" type="button" class="clear-btn">Очистить выполненные</button>
     </section>
