@@ -196,3 +196,15 @@ button {
     justify-content: flex-end;
   }
 }
+
+
+.extra-filters {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.extra-filters input,
+.extra-filters select {
+  min-width: 170px;
+}
