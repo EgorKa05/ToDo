@@ -5,6 +5,9 @@ const state = {
   tasks: [],
   filter: 'all',
   editingTaskId: null,
+  searchText: '',
+  priorityFilter: 'all',
+  sortMode: 'created_desc',
 };
 
 const form = document.getElementById('todo-form');
@@ -15,6 +18,9 @@ const list = document.getElementById('todo-list');
 const counter = document.getElementById('counter');
 const clearCompletedBtn = document.getElementById('clear-completed');
 const filterButtons = Array.from(document.querySelectorAll('.filter-btn'));
+const searchInput = document.getElementById('search-input');
+const priorityFilterInput = document.getElementById('priority-filter');
+const sortModeInput = document.getElementById('sort-mode');
 
 loadTasks();
 render();
@@ -45,6 +51,21 @@ filterButtons.forEach((button) => {
     render();
   });
 });
+searchInput.addEventListener('input', () => {
+  state.searchText = searchInput.value.trim().toLowerCase();
+  render();
+});
+
+priorityFilterInput.addEventListener('change', () => {
+  state.priorityFilter = priorityFilterInput.value;
+  render();
+});
+
+sortModeInput.addEventListener('change', () => {
+  state.sortMode = sortModeInput.value;
+  render();
+});
+
 
 function addTask(text, priority) {
   const trimmed = text.trim();
@@ -96,15 +117,34 @@ function render() {
 }
 
 function getFilteredTasks() {
+  let result = [...state.tasks];
+
   if (state.filter === 'active') {
-    return state.tasks.filter((task) => !task.completed);
+    result = result.filter((task) => !task.completed);
   }
 
   if (state.filter === 'completed') {
-    return state.tasks.filter((task) => task.completed);
+    result = result.filter((task) => task.completed);
   }
 
-  return state.tasks;
+  if (state.priorityFilter !== 'all') {
+    result = result.filter((task) => task.priority === state.priorityFilter);
+  }
+
+  if (state.searchText) {
+    result = result.filter((task) => task.text.toLowerCase().includes(state.searchText));
+  }
+
+  result.sort((a, b) => sortTasks(a, b, state.sortMode));
+  return result;
+}
+
+
+function sortTasks(a, b, mode) {
+  if (mode === 'created_asc') return a.createdAt - b.createdAt;
+  if (mode === 'alpha_asc') return a.text.localeCompare(b.text, 'ru');
+  if (mode === 'alpha_desc') return b.text.localeCompare(a.text, 'ru');
+  return b.createdAt - a.createdAt;
 }
 
 function createTaskItem(task) {
